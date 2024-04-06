@@ -1,7 +1,10 @@
 # socketとosモジュールをインポートします
 import socket
 import os
+from faker import Faker
 
+# Fakerオブジェクトを生成します
+fake = Faker()
 # UNIXソケットをストリームモードで作成します
 sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
 
@@ -46,7 +49,7 @@ while True:
             # もしデータがあれば（つまりクライアントから何かメッセージが送られてきたら）以下の処理をします。
             if data:
                 # 受け取ったメッセージを処理します。
-                response = 'Processing ' + data_str
+                response = fake.name()
                 print('sending {!r}'.format(response))
 
                 # 処理したメッセージをクライアントに送り返します。
