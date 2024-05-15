@@ -6,7 +6,7 @@ from faker import Faker
 # Fakerオブジェクトを生成します
 fake = Faker()
 # UNIXソケットをストリームモードで作成します
-sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # このサーバが接続を待つUNIXソケットのパスを設定します
 server_address = '/tmp/socket_file'
@@ -21,7 +21,7 @@ except FileNotFoundError:
 print('Starting up on {}'.format(server_address))
 
 # サーバアドレスにソケットをバインド（接続）します
-sock.bind(server_address)
+sock.bind((socket.gethostbyname(socket.gethostname()), 12345))
 
 # ソケットが接続要求を待機するようにします
 sock.listen(1)

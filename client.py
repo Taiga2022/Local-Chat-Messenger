@@ -5,7 +5,7 @@ import sys
 
 # TCP/IPソケットを作成します。
 # ここでソケットとは、通信を可能にするためのエンドポイントです。
-sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server_address = '/tmp/socket_file'
 
 
@@ -15,7 +15,7 @@ print('connecting to {}'.format(server_address))
 # サーバに接続を試みます。
 # 何か問題があった場合、エラーメッセージを表示してプログラムを終了します。
 try:
-    sock.connect(server_address)
+    sock.connect((socket.gethostbyname(socket.gethostname()), 12345))
 except socket.error as err:
     print(err)
     # sys.exit()を使うと、Pythonプログラムをすぐに終了することができます。
